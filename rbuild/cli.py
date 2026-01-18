@@ -253,7 +253,9 @@ class Builder:
                 return
 
         cg = self.cget
-        cg('clean', '-y')
+        # Only clean if the prefix directory exists
+        if os.path.exists(self.get_prefix()):
+            cg('clean', '-y')
         args = {}
         for option in ['cxx', 'cc', 'toolchain']:
             if option in self.options:
